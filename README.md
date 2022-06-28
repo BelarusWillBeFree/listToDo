@@ -1,70 +1,114 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+App.jsx
 
-## Available Scripts
+Реализуйте и экспортируйте по умолчанию компонент, который реализует приложение "записная книжка".
 
-In the project directory, you can run:
+В этом приложении можно добавлять, удалять и редактировать задачи с помощью модальных окон. На любое действие возникает модальное окно, внутри которого можно выполнять разные действия.
 
-### `npm start`
+Для прохождения испытания нужно познакомиться с новыми хуками и использовать готовые компоненты бутстрапа. Рекомендуем проходить это испытание после выполнения предыдущего.
+Примеры
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Начальный HTML:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<div class="mb-3">
+  <button type="button" data-testid="item-add" class="btn btn-secondary">add</button>
+</div>
 
-### `npm test`
+После клика на добавление:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<div class="mb-3">
+  <button type="button" data-testid="item-add" class="btn btn-secondary">add</button>
+</div>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title h4">Add</div>
+      <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <input class="form-control" data-testid="input-body" name="body" required="" value="" />
+        </div>
+        <input class="btn btn-primary" type="submit" value="submit" />
+      </form>
+    </div>
+  </div>
+</div>
 
-### `npm run build`
+После добавления первой задачи:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<div class="mb-3">
+  <button type="button" data-testid="item-add" class="btn btn-secondary">add</button>
+</div>
+<div>
+  <span class="mr-3">first task!</span>
+  <button type="button" class="border-0 btn btn-link mr-3 text-decoration-none" data-testid="item-rename">rename</button>
+  <button type="button" class="border-0 btn btn-link text-decoration-none" data-testid="item-remove">remove</button>
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Клик по переименованию:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<div class="mb-3">
+  <button type="button" data-testid="item-add" class="btn btn-secondary">add</button>
+</div>
+<div>
+  <span class="mr-3">first task!</span>
+  <button type="button" class="border-0 btn btn-link mr-3 text-decoration-none" data-testid="item-rename">rename</button>
+  <button type="button" class="border-0 btn btn-link text-decoration-none" data-testid="item-remove">remove</button>
+</div>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title h4">Rename</div>
+      <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <input class="form-control" data-testid="input-body" name="body" required="" value="first task!" />
+        </div>
+        <input class="btn btn-primary" type="submit" value="submit" />
+      </form>
+    </div>
+  </div>
+</div>
 
-### `npm run eject`
+После переименования все возвращается к предыдущему HTML, но с новым именем.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Клик по удалению:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<div class="mb-3">
+  <button type="button" data-testid="item-add" class="btn btn-secondary">add</button>
+</div>
+<div>
+  <span class="mr-3">changed name!</span>
+  <button type="button" class="border-0 btn btn-link mr-3 text-decoration-none" data-testid="item-rename">rename</button>
+  <button type="button" class="border-0 btn btn-link text-decoration-none" data-testid="item-remove">remove</button>
+</div>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title h4">Remove</div>
+      <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <input class="btn btn-danger" type="submit" value="remove" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+После удаления, запись пропадает.
+modals/Add.jsx
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Реализуйте модальное окно для добавления задачи. Сделайте так, чтобы при появлении окна происходила фокусировка на поле для ввода. Это важно с точки зрения удобства.
+modals/Rename.jsx
 
-## Learn More
+Реализуйте модальное окно для обновления названия задачи. Сделайте так, чтобы при появлении окна происходила фокусировка на поле для ввода и при этом выделялся весь текст. Это важно с точки зрения удобства.
+modals/Remove.jsx
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Реализуйте модальное окно для удаления задачи.
